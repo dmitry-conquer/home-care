@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+@import "normalize";
+
+@mixin av($property, $startSize, $minSize, $widthFrom: 1592, $widthTo: 320) {
+  $addSize: $startSize - $minSize;
+  #{$property}: calc(#{$minSize + px} + #{$addSize} * (100vw - #{$widthTo + px}) / #{($widthFrom) - ($widthTo)});
+  @media (max-width: ($widthTo + px)) {
+    #{$property}: $minSize + px;
+  }
+  @media (min-width: ($widthFrom + px)) {
+    #{$property}: $startSize + px;
+  }
+}
+
+$xl: 1199.98px;
+$lg: 991.98px;
+$md: 767.98px;
+$sm: 575.98px;
+
+[class*="__container"] {
+  margin: 0 auto;
+  padding: 0 16px;
+  max-width: 1592px;
+}
+
+.wrapper {
+  overflow: hidden;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+/* -------------------------------------------------------- */
+
+// hero
+.hero {
+   position: relative;
+   &__bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0.3;
+      z-index: -1;
+   }
+  &__container {
+    display: grid;
+    grid-template-columns: 48.91% 1fr;
+    gap: 79px;
+  }
+  &__content {
+  }
+  &__title {
+    color: #2b2d33;
+    @include av("font-size", 66, 26);
+    font-weight: 700;
+    line-height: 1.2;
+    span {
+      color: #b30738;
+    }
+    margin-bottom: 44px;
+  }
+  &__texts {
+    margin-bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__text {
+    color: #555a65;
+    @include av("font-size", 19, 11);
+    line-height: 1.6;
+    &_color {
+      padding: 12px 20px;
+      background-color: #65bec2;
+      color: #fff;
+    }
+  }
+  &__links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  &__link {
+    padding: 28px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+    line-height: 1.5;
+    &_primary {
+      background-color: #65bec2;
+      color: #fff;
+    }
+    &_danger {
+      background-color: #b30738;
+      color: #fff;
+    }
+    &_stroke {
+      background-color: transparent;
+      border: 2px solid #65bec2;
+      color: #65bec2;
+    }
+  }
+  &__images {
+  }
+  &__small-image {
+  }
+  &__big-image {
+  }
+}
