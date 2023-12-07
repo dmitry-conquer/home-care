@@ -2,7 +2,7 @@
 
 @import "normalize";
 
-@mixin av($property, $startSize, $minSize, $widthFrom: 1592, $widthTo: 320) {
+@mixin av($property, $startSize, $minSize, $widthFrom: 1592, $widthTo: 375) {
   $addSize: $startSize - $minSize;
   #{$property}: calc(#{$minSize + px} + #{$addSize} * (100vw - #{$widthTo + px}) / #{($widthFrom) - ($widthTo)});
   @media (max-width: ($widthTo + px)) {
@@ -13,6 +13,7 @@
   }
 }
 
+$xxl: 1299.98px;
 $xl: 1199.98px;
 $lg: 991.98px;
 $md: 767.98px;
@@ -33,25 +34,40 @@ $sm: 575.98px;
 }
 /* -------------------------------------------------------- */
 
-// hero
+// Hero
 .hero {
-   position: relative;
-   &__bg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0.3;
-      z-index: -1;
-   }
+  position: relative;
+  padding: 50px 0;
+  @media (max-width: ($sm)) {
+    padding: 10px 0 0 0;
+  }
+  &__bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.3;
+    z-index: -1;
+    @media (max-width: ($sm)) {
+      display: none;
+    }
+  }
   &__container {
     display: grid;
     grid-template-columns: 48.91% 1fr;
-    gap: 79px;
+    align-items: end;
+    @include av("gap", 79, 20);
+    @media (max-width: ($xl)) {
+      grid-template-columns: 1fr;
+    }
   }
   &__content {
+    order: 1;
+    @media (max-width: ($xl)) {
+      order: 2;
+    }
   }
   &__title {
     color: #2b2d33;
@@ -61,10 +77,10 @@ $sm: 575.98px;
     span {
       color: #b30738;
     }
-    margin-bottom: 44px;
+    @include av("margin-bottom", 44, 12);
   }
   &__texts {
-    margin-bottom: 44px;
+    @include av("margin-bottom", 44, 12);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -83,18 +99,31 @@ $sm: 575.98px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
+    @media (max-width: ($sm)) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   &__link {
     padding: 28px 24px;
+    @media (max-width: ($md)) {
+      padding: 24px 17px;
+    }
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     text-align: center;
     line-height: 1.5;
+    @include av("font-size", 16, 12);
+    &:hover {
+      opacity: 0.8;
+    }
     &_primary {
       background-color: #65bec2;
       color: #fff;
+      @media (max-width: ($sm)) {
+        grid-column: 1 / 3;
+      }
     }
     &_danger {
       background-color: #b30738;
@@ -107,9 +136,627 @@ $sm: 575.98px;
     }
   }
   &__images {
+    position: relative;
+    order: 2;
+    @media (max-width: ($xl)) {
+      order: 1;
+    }
+    @media (max-width: ($xl)) {
+      max-width: 70%;
+      margin: 0 auto;
+    }
+    @media (max-width: ($sm)) {
+      max-width: 100%;
+    }
   }
   &__small-image {
+    position: absolute;
+    border-radius: 16px;
+    width: 264px;
+    height: 408px;
+    object-fit: cover;
+    bottom: 65.3px;
+    left: -44px;
+    @media (max-width: ($lg)) {
+      display: none;
+    }
   }
   &__big-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px;
+  }
+}
+
+// Home Care Services in Pittsburgh, PA
+.care {
+  padding: 80px 0;
+  @media (max-width: ($sm)) {
+    padding: 50px 0;
+  }
+  &__container {
+  }
+  &__main {
+    display: grid;
+    grid-template-columns: 42.75% 1fr;
+    @include av("gap", 133, 20);
+    @media (max-width: ($xl)) {
+      margin-bottom: 60px;
+    }
+    @media (max-width: ($lg)) {
+      grid-template-columns: 1fr;
+    }
+    @media (max-width: ($sm)) {
+      margin-bottom: 20px;
+    }
+  }
+  &__content {
+    order: 1;
+    @media (min-width: ($xl)) {
+      margin-bottom: 120px;
+    }
+    @media (max-width: ($lg)) {
+      order: 2;
+    }
+  }
+  &__title {
+    color: #2b2d33;
+    @include av("font-size", 50, 25);
+    @include av("margin-bottom", 30, 12);
+    font-weight: 700;
+    line-height: 1.2;
+    @media (max-width: ($lg)) {
+      text-align: center;
+    }
+  }
+  &__text {
+    color: #555a65;
+    @include av("font-size", 20, 11);
+    line-height: 1.6;
+    a {
+      text-decoration-line: underline;
+    }
+  }
+  &__image {
+    order: 2;
+    @media (max-width: ($lg)) {
+      order: 1;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    @media (max-width: ($sm)) {
+      max-width: 100%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+  &__includes {
+    margin-bottom: 27px;
+    @media (max-width: ($md)) {
+      margin-bottom: 30px;
+    }
+    @media (min-width: ($xl)) {
+      margin-top: -80px;
+    }
+  }
+  &__includes-title {
+    color: #b30738;
+    @include av("font-size", 30, 24);
+    font-weight: 700;
+    line-height: 1.2;
+    @include av("margin-bottom", 40, 18);
+    max-width: 667px;
+    @media (max-width: ($xl)) {
+      text-align: center;
+      max-width: 100%;
+    }
+  }
+  &__includes-wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    @include av("gap", 40, 12);
+    @media (max-width: ($lg)) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__footer {
+    position: relative;
+    border-radius: 14px;
+    border: 1px solid #a1dff0;
+    background: #f1f4fa;
+    display: flex;
+    gap: 17px;
+    padding: 28px 20px 28px 162px;
+    @media (max-width: ($md)) {
+      flex-direction: column;
+      align-items: center;
+      gap: 0px;
+      padding: 0 15px 19px 15px;
+    }
+  }
+  &__footer-image {
+    width: 181.307px;
+    height: 142.545px;
+    @media (min-width: ($md)) {
+      position: absolute;
+      left: -20px;
+      bottom: -35px;
+    }
+    @media (max-width: ($md)) {
+      margin-top: -30px;
+    }
+  }
+  &__footer-text {
+    color: #555a65;
+    @include av("font-size", 18, 12);
+    line-height: 1.6;
+  }
+}
+.item-includes {
+  border-radius: 14px;
+  border: 1px solid #a1dff0;
+  background: #f1f4fa;
+  padding: 24px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: ($sm)) {
+    padding: 17px 5px;
+  }
+
+  &__image {
+    margin-bottom: 17px;
+    border-radius: 34px;
+    border: 4px solid #254251;
+    @media (max-width: ($md)) {
+      border-radius: 17.82px;
+      border: 2.096px solid #254251;
+    }
+    img {
+      width: 116px;
+      height: 116px;
+      object-fit: contain;
+      display: block;
+      @media (max-width: ($md)) {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+  &__title {
+    color: #254251;
+    @include av("font-size", 26, 14);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 7px;
+    text-align: center;
+  }
+  &__text {
+    color: #555a65;
+    text-align: center;
+    @include av("font-size", 18, 12);
+    line-height: 1.3;
+  }
+}
+
+// in-home
+.inhome {
+  padding: 98px 0;
+  position: relative;
+  @media (max-width: ($md)) {
+    padding: 40px 0 50px 0;
+  }
+  &__bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
+  &__container {
+    display: grid;
+    grid-template-columns: 55.83% 1fr;
+    @include av("gap", 50, 24);
+    @media (max-width: ($xl)) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__content {
+    order: 1;
+    @media (max-width: ($xl)) {
+      order: 2;
+    }
+  }
+  &__content-top {
+    @include av("padding-bottom", 39, 16);
+    border-bottom: 1px solid #fff;
+  }
+  &__title {
+    color: #fff;
+    @include av("font-size", 50, 24);
+    font-weight: 700;
+    line-height: 1.2;
+    @include av("margin-bottom", 27, 16);
+  }
+  &__text {
+    color: #fff;
+    @include av("font-size", 20, 12);
+    line-height: 1.6;
+    a {
+      text-decoration: underline;
+    }
+  }
+  &__content-bottom {
+    @include av("padding-top", 39, 16);
+  }
+  &__subtitle {
+    text-transform: uppercase;
+    color: #fff;
+    @include av("font-size", 27, 24);
+    font-weight: 700;
+    line-height: 1.2;
+    @include av("margin-bottom", 26, 16);
+  }
+  &__services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    @media (max-width: ($sm)) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__image {
+    order: 2;
+    @media (max-width: ($xl)) {
+      order: 1;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    @media (max-width: ($sm)) {
+      max-width: 100%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}
+.service-inhome {
+  @media (min-width: ($sm)) {
+    &:last-child {
+      grid-column: 1 / 3;
+    }
+  }
+  display: flex;
+  padding: 12px 20px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  display: flex;
+  flex-direction: column;
+  &__title {
+    color: #b30738;
+    @include av("font-size", 20, 16);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  &__text {
+    color: #1e1e1e;
+    @include av("font-size", 16, 12);
+    line-height: 1.6;
+  }
+}
+
+// flexibility
+.flexibility {
+  border: 1px solid #a1dff0;
+  background: #e3f5fb;
+  padding: 40px 0;
+  &__container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 37.5% 1fr;
+    @include av("gap", 31, 15);
+    @media (max-width: ($xl)) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__main {
+    display: flex;
+    align-items: center;
+    @include av("gap", 31, 15);
+  }
+  &__image {
+    @include av("width", 111, 66);
+    @include av("height", 111, 66);
+    display: block;
+    object-fit: contain;
+  }
+  &__title {
+    color: #1e1e1e;
+    @include av("font-size", 26, 18);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  &__text {
+    color: #1e1e1e;
+    font-family: Poppins;
+    @include av("font-size", 16, 12);
+    line-height: 2;
+  }
+}
+
+// determine
+.determine {
+  padding: 107px 0 85px 0;
+  @media (max-width: ($md)) {
+    padding: 28px 0 0 0;
+  }
+  &__container {
+  }
+  &__title {
+    color: #2b2d33;
+    @include av("font-size", 50, 24);
+    font-weight: 700;
+    line-height: 1.2;
+    @include av("margin-bottom", 40, 12);
+
+    span {
+      color: #b30738;
+    }
+  }
+}
+.top-determine {
+  display: grid;
+  grid-template-columns: 37.6% 1fr;
+  @include av("gap", 46, 12);
+  margin-bottom: 40px;
+  @media (max-width: ($sm)) {
+    margin-bottom: 43px;
+  }
+  @media (max-width: ($lg)) {
+    grid-template-columns: 1fr;
+  }
+  &__images {
+    width: 100%;
+    @include av("height", 534, 310);
+    @media (max-width: ($lg)) {
+      width: 500px;
+      height: 500px;
+      margin: 0 auto;
+    }
+    @media (max-width: ($sm)) {
+      width: 340px;
+      height: 310px;
+    }
+  }
+  &__medium {
+    width: 75.1%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+  &__big {
+    width: 82.14%;
+    height: auto;
+    margin-left: auto;
+    object-fit: cover;
+    display: block;
+    transform: translateY(-35%);
+  }
+  &__small {
+    width: 39.86%;
+    height: auto;
+    margin-left: 40px;
+    object-fit: cover;
+    display: block;
+    transform: translateY(-155%);
+  }
+  &__content {
+  }
+  &__texts {
+    display: flex;
+    flex-direction: column;
+    @include av("gap", 17, 12);
+  }
+  &__text {
+    color: #555a65;
+    font-size: 20px;
+    @include av("font-size", 20, 12);
+    line-height: 1.6;
+    &_bg {
+      border-radius: 10px;
+      border: 1px solid #a1dff0;
+      background: #f1f4fa;
+      padding: 24px;
+      @media (max-width: ($sm)) {
+        padding: 13px;
+      }
+    }
+  }
+}
+.bottom-determine {
+  display: grid;
+  grid-template-columns: 1fr 62.43%;
+  align-items: center;
+  height: 444px;
+  @media (max-width: ($xl)) {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  &__text {
+    order: 1;
+    position: relative;
+    z-index: 10;
+    color: #555a65;
+    @include av("font-size", 18, 12);
+    line-height: 1.6;
+    padding: 60px 32px;
+    background: #fff;
+    box-shadow: 0px 23px 35px 0px rgba(126, 126, 126, 0.25);
+    margin-right: -30px;
+    @media (max-width: ($xl)) {
+      margin-right: 0;
+      order: 2;
+    }
+    @media (max-width: ($md)) {
+      padding: 12px 14px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+  &__content {
+    position: relative;
+    display: flex;
+    height: 100%;
+    order: 2;
+    @media (max-width: ($xl)) {
+      order: 1;
+      min-height: 469px;
+    }
+    @media (max-width: ($md)) {
+      min-height: 369px;
+    }
+    @media (max-width: ($sm)) {
+      min-height: 227px;
+    }
+  }
+  &__frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: -25px;
+    right: -25px;
+    border: 1px solid #b30738;
+    z-index: -1;
+    @media (max-width: ($xl)) {
+      display: none;
+    }
+  }
+  &__image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  &__name {
+    color: #fff;
+    @include av("font-size", 30, 26);
+    font-weight: 700;
+    line-height: 1.2;
+    position: absolute;
+    left: 57px;
+    bottom: 49px;
+    max-width: 273px;
+    @media (max-width: ($md)) {
+      left: 20px;
+      bottom: 20px;
+    }
+  }
+  &__logo {
+    width: 252.292px;
+    height: 106.409px;
+    object-fit: contain;
+    position: absolute;
+    right: 12px;
+    bottom: 20px;
+    @media (max-width: ($md)) {
+      display: none;
+    }
+  }
+}
+
+//nonskilled
+.nonskilled {
+  padding: 130px 0 140px 0;
+  @media (max-width: ($xl)) {
+    padding: 90px 0 80px 0;
+  }
+  @media (max-width: ($md)) {
+    padding: 40px 0 30px 0;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @include av("gap", 41, 28);
+    @media (max-width: ($lg)) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: ($sm)) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: auto;
+    @include av("gap", 36, 15);
+    &_reverse {
+      flex-direction: column-reverse;
+      @media (max-width: ($sm)) {
+        flex-direction: column;
+      }
+    }
+    &_center {
+      @media (max-width: ($lg)) {
+         display: none;
+      }
+    }
+  }
+  &__col-image {
+    width: 100%;
+    height: 323px;
+    @media (max-width: ($lg)) {
+       height: auto;
+    }
+    object-fit: cover;
+    display: block;
+ 
+  }
+  &__col-center-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  &__col-text {
+    color: #555a65;
+    @include av("font-size", 18, 12);
+    line-height: 1.6;
+  }
+  &__title {
+    position: absolute;
+    z-index: 20;
+    bottom: -68px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 575px;
+    @include av('width', 575, 100);
+    @include av('padding', 34, 10);
+    background: #b30738;
+    box-shadow: 0px 23px 35px 0px rgba(126, 126, 126, 0.25);
+    color: #fff;
+    text-align: center;
+    @include av("font-size", 38, 20);
+    font-weight: 700;
+    line-height: 1.2;
   }
 }
