@@ -11,11 +11,11 @@ export const style = () => {
    const plugins = [
       autoprefixer({ grid: true, overrideBrowserslist: 'last 2 versions' }),
       cssnano(),
-      // combineMediaQueries(),
+      combineMediaQueries(),
    ];
 
    return app.gulp
-      .src(app.path.src.scss, { sourcemaps: app.isDev })
+      .src(app.path.src.scss, { sourcemaps: !app.isDev })
       .pipe(
          sass({
             outputStyle: 'expanded',
